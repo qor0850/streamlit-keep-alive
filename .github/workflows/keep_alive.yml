@@ -1,0 +1,25 @@
+name: Streamlit KeepAlive
+
+on:
+  schedule:
+    - cron: "0 */12 * * *"
+  workflow_dispatch:
+
+jobs:
+  run-keep-alive:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 코드 체크아웃
+        uses: actions/checkout@v3
+
+      - name: 🐍 Python 설치
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+
+      - name: 📦 의존성 설치
+        run: pip install requests
+
+      - name: 🚀 KeepAlive 실행
+        run: python keep_alive.py
